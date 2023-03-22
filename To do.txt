@@ -1,0 +1,45 @@
+To do:
+- Edit grades
+- Delete grades
+
+- Create payments
+- Edit payments
+- Delete payments
+
+- Create academic offer
+- Edit academic offer
+- Delete academic offer
+
+- Read internships
+- Create internships
+- Edit internships
+- Delete internships
+
+- Read social service
+- Create social service
+- Edit social service
+- Delete social service
+
+- Edit drafts
+- Delete drafts
+
+#############################
+
+Llevar el control de los espacios de las asignaturas
+Definiendo un limite máx. de 30 espacios.
+
+Desarrollar un sistema de petición de asignaturas. Cuota min. por asignatura de 15 estudiantes.
+
+#############################
+
+Futuras implementaciones
+
+- Contactacto entre estudiantes para intercambiar asignaturas
+
+- Sistema de autoselección de asignaturas
+
+- Agendar autocarga
+
+- Recibir notificaciones y reportes en Whatsapp, Correo y Telegram
+
+- Implementar una aplicación móvil

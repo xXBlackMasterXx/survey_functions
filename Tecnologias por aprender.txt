@@ -1,0 +1,12 @@
+Hadoop
+Hive
+Impala
+Kudu
+Hbase
+Spark
+Kafka
+Scala
+Jenkins
+Docker
+CI/CD
+Kubernetes
