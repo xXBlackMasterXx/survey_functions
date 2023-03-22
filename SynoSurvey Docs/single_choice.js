@@ -137,20 +137,3 @@ function single_choice({question_code, schema, randomize, array_filter, hide_ans
         }
     }
 }
-
-// Array filter inclusive
-single_choice({
-    question_code : "P1xQ1",
-    // schema : "",
-    randomize : {
-        // filter_schema : "",
-        answer_groups : [[1,2,3],[5,6]],
-        randomize_groups : true // false
-    },
-    array_filter : {
-        filter : "Q1",
-        filter_schema : "Q1xFILTER",
-        type : "inclusive"
-    }
-    //, hide_answers : [1]
-});
