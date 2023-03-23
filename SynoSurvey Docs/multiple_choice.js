@@ -37,6 +37,7 @@ function multiple_choice({ question_code, schema, randomize, array_filter, hide_
             });
 
             new_positions.forEach((new_position) => {
+                console.log("form_check to be removed", options[new_position]["form_check"]);
                 options[new_position]["form_check"].remove();
                 options_container.appendChild(options[new_position]["form_check"]);
             });
