@@ -1,5 +1,3 @@
-"use strict";
-
 function single_choice({question_code, schema, randomize, array_filter, hide_answers} = {})  {
     var question_card = document.querySelector("#q_"+question_code+"_card");
     var options_container = question_card.querySelector("#p_"+question_code);
@@ -17,26 +15,34 @@ function single_choice({question_code, schema, randomize, array_filter, hide_ans
     if(randomize !== undefined) {
         if(randomize["filter_schema"] !== undefined) {
             /* RANDOMIZE BASED ON PREVIOUS QUESTION */
-            var filtered_positions;
+            var filter;
+            var filtered_positions = [];
             var new_positions = [];
-            var j=0;
+            var j = 0;
 
             response.answers.forEach((answer) => {
-                if(answer.questionCode == randomize["filter_schema"]) {
-                    filtered_positions = answer.value.split(",");
+                if (answer.questionCode == randomize["filter_schema"]) {
+                    filter = answer.value.split(",");
                 }
             });
             
+            filter.forEach((filtered_position) => {
+                if(Object.keys(options).includes(filtered_position)) {
+                    filtered_positions.push(filtered_position);
+                }
+            });
+
             Object.keys(options).forEach((answer_code, index) => {
-                if(filtered_positions.includes(answer_code)) {
+                if (filtered_positions.includes(answer_code)) {
                     new_positions.push(filtered_positions[j]);
                     j++;
                 } else {
                     new_positions.push(answer_code);
                 }
-            });
+            })
 
             new_positions.forEach((new_position) => {
+                console.log("form_check to be removed", options[new_position]["form_check"]);
                 options[new_position]["form_check"].remove();
                 options_container.appendChild(options[new_position]["form_check"]);
             });

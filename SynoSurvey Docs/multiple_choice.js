@@ -13,17 +13,51 @@ function multiple_choice({ question_code, schema, randomize, array_filter, hide_
         options[answer_code] = { "form_check": form_check, "input": answer, "label": label, "open_text": open_text };
     });
 
+    function autocheck_free_text() {
+        for (let [key, value] of Object.entries(options)) {
+            if (value.open_text != null) {
+                value.open_text.addEventListener("input", (e) => {
+                    if (e.target.value != "") {
+                        value.input.checked = true;
+                    } else {
+                        value.input.checked = false;
+                    }
+                });
+            }
+        }
+    }
+
+    function clear_unchecked() {
+        for (let [key, value] of Object.entries(options)) {
+            if (value.open_text != null && value.input.checked == false && value.open_text.value != "") {
+                value.open_text.value = "";
+            }
+        }
+    }
+
+    window.addEventListener("load", autocheck_free_text);
+    question_card.addEventListener("change", clear_unchecked);
+    window.addEventListener("load", autocheck_free_text);
+    question_card.addEventListener("change", clear_unchecked);
+
     /* RANDOMIZATION */
     if (randomize !== undefined) {
         if (randomize["filter_schema"] !== undefined) {
             /* RANDOMIZE BASED ON PREVIOUS QUESTION */
-            var filtered_positions;
+            var filter;
+            var filtered_positions = [];
             var new_positions = [];
             var j = 0;
 
             response.answers.forEach((answer) => {
                 if (answer.questionCode == randomize["filter_schema"]) {
-                    filtered_positions = answer.value.split(",");
+                    filter = answer.value.split(",");
+                }
+            });
+            
+            filter.forEach((filtered_position) => {
+                if(Object.keys(options).includes(filtered_position)) {
+                    filtered_positions.push(filtered_position);
                 }
             });
 
@@ -34,7 +68,7 @@ function multiple_choice({ question_code, schema, randomize, array_filter, hide_
                 } else {
                     new_positions.push(answer_code);
                 }
-            });
+            })
 
             new_positions.forEach((new_position) => {
                 console.log("form_check to be removed", options[new_position]["form_check"]);
@@ -146,31 +180,7 @@ function multiple_choice({ question_code, schema, randomize, array_filter, hide_
         var feedback;
         var n_checked;
 
-        function autocheck_free_text() {
-            for (let [key, value] of Object.entries(options)) {
-                if (value.open_text != null) {
-                    value.open_text.addEventListener("input", (e) => {
-                        if (e.target.value != "") {
-                            value.input.checked = true;
-                        } else {
-                            value.input.checked = false;
-                        }
-                    });
-                }
-            }
-        }
-
-        function clear_unchecked() {
-            for (let [key, value] of Object.entries(options)) {
-                if (value.open_text != null && value.input.checked == false && value.open_text.value != "") {
-                    value.open_text.value = "";
-                }
-            }
-        }
-
         function count_checked() {
-            autocheck_free_text();
-            clear_unchecked();
             n_checked = question_card.querySelectorAll(".form-check > input:checked").length;
 
             if ((validation["max_limit"] !== undefined && n_checked >= validation["max_limit"]) || (validation["n_required"] !== undefined && n_checked >= validation["n_required"])) {
