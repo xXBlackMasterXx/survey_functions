@@ -54,9 +54,9 @@ function multiple_choice({ question_code, schema, randomize, array_filter, hide_
                     filter = answer.value.split(",");
                 }
             });
-            
+
             filter.forEach((filtered_position) => {
-                if(Object.keys(options).includes(filtered_position)) {
+                if (Object.keys(options).includes(filtered_position)) {
                     filtered_positions.push(filtered_position);
                 }
             });
@@ -217,11 +217,34 @@ function multiple_choice({ question_code, schema, randomize, array_filter, hide_
                         feedback.remove();
                     }
 
+                    let translations = {
+                        "en": "Please select at least {n} option(s)",
+                        "fr": "Veuillez sélectionner au moins {n} option(s)",
+                        "de": "Bitte wählen Sie mindestens {n} Option(en)",
+                        "it": "Seleziona almeno {n} opzione(i)",
+                        "es": "Por favor, selecciona al menos {n} opción(es)",
+                        "no": "Vennligst velg minst {n} alternativ(er)",
+                        "sv": "Vänligen välj minst {n} alternativ",
+                        "da": "Vælg venligst mindst {n} mulighed(er)"
+                    };
+
+                    let lang = navigator.language.substring(0, 2);
+
+                    let translation = translations[lang] || translations["en"];
+
                     options_container.insertAdjacentHTML(
+                        "beforebegin",
+                        `<span class="d-block custom-error pb-1 text-center" id="feedback_${question_code}">
+                          <span class="form-error-message text-danger">${translation.replace("{n}", String(validation["n_required"]))}</span>
+                        </span>`
+                    );
+
+
+                    /*options_container.insertAdjacentHTML(
                         "beforebegin",
                         `<span class="d-block custom-error pb-1 text-center" id="feedback_` + question_code + `">
                         <span class="form-error-message text-danger">Please, select at least `+ String(validation["min_limit"]) + ` options</span></span>`
-                    );
+                    );*/
 
                     question_card.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
                 }
@@ -233,15 +256,59 @@ function multiple_choice({ question_code, schema, randomize, array_filter, hide_
                         feedback.remove();
                     }
 
+                    let translations = {
+                        "en": "Please select {n} option(s)",
+                        "fr": "Veuillez sélectionner {n} option(s)",
+                        "de": "Bitte wählen Sie {n} Option(en)",
+                        "it": "Seleziona {n} opzione(i)",
+                        "es": "Por favor, selecciona {n} opción(es)",
+                        "no": "Vennligst velg {n} alternativ(er)",
+                        "sv": "Vänligen välj {n} alternativ",
+                        "da": "Vælg venligst {n} mulighed(er)"
+                    };
+
+                    let lang = navigator.language.substring(0, 2);
+
+                    let translation = translations[lang] || translations["en"];
+
                     options_container.insertAdjacentHTML(
+                        "beforebegin",
+                        `<span class="d-block custom-error pb-1 text-center" id="feedback_${question_code}">
+                          <span class="form-error-message text-danger">${translation.replace("{n}", String(validation["n_required"]))}</span>
+                        </span>`
+                    );
+
+
+                    /*options_container.insertAdjacentHTML(
                         "beforebegin",
                         `<span class="d-block custom-error pb-1 text-center" id="feedback_` + question_code + `">
                         <span class="form-error-message text-danger">Please, select `+ String(validation["n_required"]) + ` options</span></span>`
-                    );
+                    );*/
 
                     question_card.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
                 }
             }
         });
     }
+
+    // Bug fixed: Exclusive options break after applying all the codes above
+    exclusive = question_card.querySelectorAll("input.exclusive");
+    exclusive.forEach((button) => {
+        button.addEventListener("change", (e) => {
+            if (button.checked == true) {
+                question_card.querySelectorAll("input").forEach((other_button) => {
+                    if (other_button != button) {
+                        other_button.disabled = true;
+                        other_button.checked = false;
+                    }
+                });
+            } else {
+                question_card.querySelectorAll("input").forEach((other_button) => {
+                    if (other_button != button) {
+                        other_button.disabled = false;
+                    }
+                });
+            }
+        });
+    });
 }
