@@ -1,0 +1,134 @@
+Todos los codigos que se les delegue la obligatoriedad requieren un una variable para configurarla como obligatoria o no obligatoria
+Todos los codigos deben usar los answer codes
+Todos los codigos deben funcionar con randomizacion
+Todos los codigos deben funcionar con filtros
+
+
+# Single choice:
+- Randomizar opciones [falta arreglar randomizado dentro grupos sin randomizado entre grupos]
+- Anclar opciones
+- Array filter [no hay manera de filtrar solo codes del filtro en pregunta actual]
+- Array filter exclusive
+- Randomizar basado en otra pregunta previa
+- Ocultar opciones
+- Establecer como obligatoria
+- Agregar mensajes de error para
+	- No seleccionar una respuesta
+	- Soporte para diferentes idiomas
+- Debe funcionar si:
+	- Se filtra
+	- Se randomiza
+
+# Multiple choice
+- Establecer requeridas
+- Establecer minimas seleccionadas
+- Establecer máximas seleccionadas
+- Randomizar opciones
+- Anclar opciones
+- Array filter
+- Array filter exclusive
+- Randomizar basado en otra pregunta previa
+- Establecer como obligatoria
+- Ocultar opciones
+- Corregir de exclusive options
+- Agregar mensajes de error para:
+	- No seleccionar una respuesta
+	- Seleccionar menos de las posible
+	- No seleccionar las requeridas
+	- Soporte para diferentes idiomas
+- Debe funcionar si:
+	- Se filtra
+	- Se randomiza
+	
+
+# Matriz simple
+- Randomizar filas
+- Randomizar filas basado en pregunta previa
+	- Single choice
+	- Multiple choice
+- Randomizar columnas
+- Randomizar columnas basado en pregunta previa
+	- Single choice
+	- Multiple choice
+- Anclar filas
+- Anclar columnas
+- Array filter de filas
+- Array filter exclusive de filas
+- Array filter de columnas
+- Array filter exclusive de columnas
+- Exclusive options para filas
+- Exclusive options para columnas
+- Ocultar filas
+- Ocultar columnas
+- Establecer como obligatoria
+- Agregar mensajes de error para:
+	- No seleccionar respuestas en una fila
+	- Usar color llamativo en la fila que falta por rellenar
+	- Soporte para diferentes idiomas
+- Debe funcionar si:
+	- Se filtra
+	- Se randomiza
+
+# Matriz multiple
+- Establecer opciones seleccionadas requeridas en filas
+- Establecer minimas opciones en filas seleccionadas
+- Establecer máximas opciones en filas seleccionadas
+- Establecer opciones seleccionadas requeridas en columnas
+- Establecer minimas opciones en columnas seleccionadas
+- Establecer máximas opciones en columnas seleccionadas
+- Randomizar filas
+- Randomizar filas basado en pregunta previa
+	- Single choice
+	- Multiple choice
+- Randomizar columnas
+- Randomizar columnas basado en pregunta previa
+	- Single choice
+	- Multiple choice
+- Anclar filas
+- Anclar columnas
+- Array filter de filas
+- Array filter exclusive de filas
+- Array filter de columnas
+- Array filter exclusive de columnas
+- Exclusive options para filas
+- Exclusive options para columnas
+- Ocultar filas
+- Ocultar columnas
+- Establecer como obligatoria
+- Agregar mensajes de error para:
+	- No seleccionar respuestas en una fila
+	- Usar color llamativo en la fila que falta por rellenar
+	- Soporte para diferentes idiomas
+- Debe funcionar si:
+	- Se filtra
+	- Se randomiza
+
+# Open text
+- Mostrarla y esconderla si opcion de single choice es elegida
+- Mostrarla y esconderla si opcion de multiple choice es elegida
+- Mostrarla y esconderla si celda de matriz es elegida 
+- Añadir soporte de validacion numerica
+	- Solo numeros enteros
+	- Permitir decimales
+	- Permitir numeros negativos
+	- Limitar longitud de numeros
+	- Establecer valor minimo
+	- Establecer valor maximo
+- Convertir label a sufijo
+- Convertir label a prefijo
+- Establecer como obligatoria
+- Agregar mensajes de error para:
+	- Dejar campo vacio
+	- Usar color llamativo para marcar la cajita
+
+# Multiple open text
+- Limite de caracteres por celda
+- Minimo, máximo, suma requerida
+- palabras requeridas
+- Validacion de codigos postales
+- Validacion de emails
+- Validacion de num, telefonico
+
+Matrices: 
+
+free answers per row in matrices

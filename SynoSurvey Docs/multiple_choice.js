@@ -1,5 +1,3 @@
-"use strict";
-
 function multiple_choice({ question_code, schema, randomize, array_filter, hide_answers, validation } = {}) {
     var question_card = document.querySelector("#q_" + question_code + "_card");
     var options_container = question_card.querySelector("#p_" + question_code);
